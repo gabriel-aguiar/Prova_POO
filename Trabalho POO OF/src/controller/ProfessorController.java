@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -17,12 +18,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 
 public class ProfessorController extends Application{
 
@@ -46,6 +49,9 @@ public class ProfessorController extends Application{
 	    
 	    @FXML
 	    private Button btn_buscar_prof;
+	    
+	    @FXML
+	    private DatePicker datePickerEmissao;
 
 	    @FXML
 	    private Label label_id;
@@ -79,6 +85,7 @@ public class ProfessorController extends Application{
 					tf_nome_professor.setText(pessoa.getNome());
 					tf_email_professor.setText(pessoa.getEmail());
 					tx_Cpf.setText(pessoa.getPeso() + "");
+					datePickerEmissao.setValue(pessoa.getData_admissao().toLocalDate());
 				}
 
 			}
@@ -93,6 +100,7 @@ public class ProfessorController extends Application{
 	    	limpaCampos();
 	    	int qtde = new ProfessorDao().inserir(professor);
 	    	listarProfessor();
+	    	System.out.println(qtde);
     	
 	    }
 	    
@@ -122,12 +130,11 @@ public class ProfessorController extends Application{
 	    	
 	    
 	    private Professor pegaDados() {
-			return new Professor(tf_nome_professor.getText(), tf_email_professor.getText(), Double.valueOf(tx_Cpf.getText()));
+			return new Professor(tf_nome_professor.getText(), tf_email_professor.getText(), Double.valueOf(tx_Cpf.getText()), Date.valueOf(datePickerEmissao.getValue()));
 		}
 		
 		private Professor pegaDadosID() {
-			System.out.println(label_label.getText() + "-" + tx_Cpf.getText());
-			return new Professor(Integer.valueOf(label_label.getText()), tf_nome_professor.getText(), tf_email_professor.getText(), Double.valueOf(tx_Cpf.getText()));
+			return new Professor(Integer.valueOf(label_label.getText()), tf_nome_professor.getText(), tf_email_professor.getText(), Double.valueOf(tx_Cpf.getText()), Date.valueOf(datePickerEmissao.getValue()));
 		}
 	
 		private void limpaCampos() {
@@ -138,6 +145,7 @@ public class ProfessorController extends Application{
 			label_id.setVisible(false);
 			label_label.setVisible(false);
 			label_label.setText("");
+			datePickerEmissao.setValue(null);
 		}
 		
 	    
@@ -148,7 +156,8 @@ public class ProfessorController extends Application{
 				ta_lista_professor.appendText(pessoa.toString() + "\n");
 			});
 		}
-		
+	    
+	    
 		public void execute() {
 			launch();
 		}

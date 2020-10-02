@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,10 +13,10 @@ import entidade.Professor;
 
 public class ProfessorDao extends ConexaoDb {
 	
-	final String SQL_INSERT_PROFESSOR = "INSERT INTO Professor (NOME, EMAIL, PESO) VALUES ( ?, ?, ?)";
+	final String SQL_INSERT_PROFESSOR = "INSERT INTO Professor (NOME, EMAIL, PESO, DATA_ADMISSAO) VALUES ( ?, ?, ?, ?)";
 	final String SQL_SELECT_PROFESSOR = "SELECT * FROM Professor";
 	final String SQL_SELECT_PROFESSOR_ID = "SELECT * FROM Professor WHERE ID = ?";
-	final String SQL_ALTERA_PROFESSOR = "UPDATE Professor SET NOME=?, EMAIL=? , PESO=? WHERE ID = ?";
+	final String SQL_ALTERA_PROFESSOR = "UPDATE Professor SET NOME=?, EMAIL=? , PESO=?, DATA_ADMISSAO=? WHERE ID=?";
 	final String DELETA_Professor = "DELETE FROM Professor WHERE ID = ?";
 	
 	public int inserir(Professor professor) {
@@ -26,6 +27,7 @@ public class ProfessorDao extends ConexaoDb {
 			pst.setString(1, professor.getNome());
 			pst.setString(2, professor.getEmail());
 			pst.setDouble(3, professor.getPeso());
+			pst.setDate(4,Date.valueOf(professor.getData_admissao().toString()));
 			quantidade = pst.executeUpdate();
 
 		} catch (SQLException e) {
@@ -52,6 +54,7 @@ public class ProfessorDao extends ConexaoDb {
 				professor.setNome(rs.getString("NOME"));
 				professor.setEmail(rs.getString("EMAIL"));
 				professor.setPeso(rs.getDouble("PESO"));
+				professor.setData_admissao(Date.valueOf((rs.getString("DATA_ADMISSAO"))));
 				
 				listaProfessor.add(professor);
 				System.out.println(professor);
@@ -80,6 +83,7 @@ public class ProfessorDao extends ConexaoDb {
 					professor.setNome(rs.getString("NOME"));
 					professor.setEmail(rs.getString("EMAIL"));
 					professor.setPeso(rs.getDouble("PESO"));
+					professor.setData_admissao(rs.getDate("DATA_ADMISSAO"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -98,7 +102,8 @@ public class ProfessorDao extends ConexaoDb {
 				pst.setString(1, professor.getNome());
 				pst.setString(2, professor.getEmail());
 				pst.setDouble(3, professor.getPeso());
-				pst.setInt(4, professor.getId());
+				pst.setDate(4, Date.valueOf(professor.getData_admissao().toString()));
+				pst.setInt(5, professor.getId());
 				quantidade = pst.executeUpdate();
 
 			} catch (SQLException e) {

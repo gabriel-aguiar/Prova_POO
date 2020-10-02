@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
@@ -10,28 +12,41 @@
 
 <!-- CTRL + 3 -->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfessorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="485.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfessorController">
    <children>
       <TextField fx:id="tf_nome_professor" layoutX="62.0" layoutY="33.0" promptText="Nome do professor " />
       <TextField fx:id="tf_email_professor" layoutX="62.0" layoutY="70.0" promptText="E-mail" />
-      <Button fx:id="btn_adicionar_prof" layoutX="268.0" layoutY="18.0" mnemonicParsing="false" onAction="#inserirProfessor" text="Adicionar" />
-      <Button fx:id="btn_excluir_prof" layoutX="278.0" layoutY="94.0" mnemonicParsing="false" onAction="#excluiProfessor" text="Excluir" />
-      <ScrollPane layoutX="40.0" layoutY="141.0" prefHeight="114.0" prefWidth="424.0">
+      <Button fx:id="btn_adicionar_prof" layoutX="268.0" layoutY="16.0" mnemonicParsing="false" onAction="#inserirProfessor" style="-fx-background-color: green; -fx-border-color: black; -fx-border-width: 2;" text="Adicionar">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></Button>
+      <Button fx:id="btn_excluir_prof" layoutX="276.0" layoutY="116.0" mnemonicParsing="false" onAction="#excluiProfessor" style="-fx-background-color: red; -fx-border-color: black; -fx-border-width: 2;" text="Excluir">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></Button>
+      <ScrollPane layoutX="1.0" layoutY="181.0" prefHeight="114.0" prefWidth="485.0">
          <content>
-            <TextArea fx:id="ta_lista_professor" prefHeight="235.0" prefWidth="441.0" />
+            <TextArea fx:id="ta_lista_professor" prefHeight="235.0" prefWidth="1455.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="btn_edita_prof" layoutX="280.0" layoutY="59.0" mnemonicParsing="false" onAction="#AlterarProfessor" text="Editar" />
-      <Label fx:id="label_id" layoutX="29.0" layoutY="18.0" prefHeight="25.0" prefWidth="21.0" />
+      <Button fx:id="btn_edita_prof" layoutX="278.0" layoutY="66.0" mnemonicParsing="false" onAction="#AlterarProfessor" style="-fx-background-color: silver; -fx-border-color: black; -fx-border-width: 2;" text="Editar">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></Button>
+      <Label fx:id="label_id" layoutX="14.0" layoutY="18.0" prefHeight="25.0" prefWidth="21.0" />
       <TextField fx:id="tx_busca_id" layoutX="398.0" layoutY="47.0" prefHeight="25.0" prefWidth="57.0" />
-      <Label layoutX="398.0" layoutY="22.0" text="Digite o ID" />
-      <Button fx:id="btn_buscar_prof" layoutX="401.0" layoutY="82.0" mnemonicParsing="false" onAction="#buscarProfessor" text="Buscar" />
+      <Label layoutX="398.0" layoutY="22.0" text="Digite o ID" wrapText="true" />
+      <Button fx:id="btn_buscar_prof" layoutX="397.0" layoutY="83.0" mnemonicParsing="false" onAction="#buscarProfessor" style="-fx-background-color: silver; -fx-border-color: black; -fx-border-width: 2;" text="Buscar">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></Button>
       <Label layoutX="121.0" layoutY="4.0" text="Cadastro">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="label_label" layoutX="84.0" layoutY="20.0" prefHeight="25.0" prefWidth="2.0" />
+      <Label fx:id="label_label" layoutX="77.0" layoutY="6.0" prefHeight="25.0" prefWidth="2.0" />
       <TextField fx:id="tx_Cpf" layoutX="62.0" layoutY="107.0" promptText="Peso" />
+      <DatePicker fx:id="datePickerEmissao" layoutX="62.0" layoutY="141.0" prefHeight="25.0" prefWidth="149.0" />
    </children>
 </AnchorPane>
